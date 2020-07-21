@@ -1,6 +1,33 @@
 // BUDGET CONTROLLER
 let budgetController = (function () {
 
+    let Expense = function (id, description, value) {
+        this.id = id
+        this.description = description
+        this.value = value
+    }
+
+    let Income = function (id, description, value) {
+        this.id = id
+        this.description = description
+        this.value = value
+    }
+
+    var allExpenses = []
+    var allIncomes = []
+    var totalExpenses = 0
+
+    var data = {
+        allItems: {
+            exp: [],
+            inc: []
+        },
+        totals: {
+            exp:0,
+            inc:0
+        }
+    }
+
 })();
 
 //UI CONTROLLER
@@ -59,7 +86,7 @@ let controller = (function (budgetCtrl, UICtrl) {
 
         // 5.Display the budget on the UI
 
-        console.log('hi bitch');
+        // console.log('hi bitch');
     }
 
     return {
