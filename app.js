@@ -241,6 +241,16 @@ let controller = (function (budgetCtrl, UICtrl) {
         UICtrl.displayBudget(budget)
     }
 
+    let updatePercentages = function (){
+
+        // 1. Calculate percentages
+
+        // 2.read percentages from the budget controller
+
+        // 3. update tthe UI with the new percentages
+    }
+
+
     let ctrlAddItem = function () {
 
         let input, newItem
@@ -260,6 +270,9 @@ let controller = (function (budgetCtrl, UICtrl) {
 
             // 5. Calculate and update budget
             updateBudget()
+
+            // 6. calculate and update percentages
+            updatePercentages()
         }
     }
 
@@ -280,6 +293,9 @@ let controller = (function (budgetCtrl, UICtrl) {
 
             // 3. Update and show the new budget
             updateBudget()
+
+            // 4. calculate and update percentages
+            updatePercentages()
         }
     }
 
