@@ -170,6 +170,12 @@ let UIController = (function () {
         return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec
     }
 
+    let nodeListForEach = function (list, callback) {
+        for (let i = 0; i < list.length; i++) {
+            callback(list[i], i)
+        }
+    }
+
     return {
         getInput: function () {
             return {
@@ -252,12 +258,6 @@ let UIController = (function () {
 
             let fields = document.querySelectorAll(DOMStrings.expensesPercLabel)
 
-            let nodeListForEach = function (list, callback) {
-                for (let i = 0; i < list.length; i++) {
-                    callback(list[i], i)
-                }
-            }
-
             nodeListForEach(fields, function (current, index) {
                 if (percentages[index] > 0) {
                     current.textContent = percentages[index] + '%'
@@ -271,11 +271,24 @@ let UIController = (function () {
             let now, year, month, months, day
 
             now = new Date()
-            months = ['January','February','March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
             month = now.getMonth()
             year = now.getFullYear()
             document.querySelector(DOMStrings.dateLabel).textContent = months[month] + ' ' + year
+        },
+
+        changedType: function () {
+            let fields = document.querySelectorAll(
+                DOMStrings.inputType + ',' +
+                DOMStrings.inputDescription + ',' +
+                DOMStrings.inputValue)
+
+            nodeListForEach(fields, function (cur) {
+                cur.classList.toggle('red-focus')
+            })
+
+            document.querySelector(DOMStrings.inputButton).classList.toggle('red')
         },
 
         getDOMStrings: function () {
@@ -304,6 +317,8 @@ let controller = (function (budgetCtrl, UICtrl) {
 
 
         document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem)
+
+        document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType)
     }
 
     let updateBudget = function () {
